@@ -73,22 +73,22 @@ def maphtml():
 def home():
     inp_features = str(request.form['mail'])
 
-#    try:
-    model_svm = pickle.load(open('SVM.pkl','rb'))
-    vocabulary = pd.read_feather('vocabulary.ftr')
-    test_str = word_to_count_matrix(inp_features, list(dict(vocabulary).keys()))
+    try:
+        model_svm = pickle.load(open('SVM.pkl','rb'))
+        vocabulary = pd.read_feather('vocabulary.ftr')
+        test_str = word_to_count_matrix(inp_features, list(dict(vocabulary).keys()))
 
-    parameters = pd.read_feather('spam_ham_parameters.ftr')
-    parameters.set_index('word', inplace=True)
+        parameters = pd.read_feather('spam_ham_parameters.ftr')
+        parameters.set_index('word', inplace=True)
 
-    res_svm = ['ham','spam'][int(model_svm.predict(np.array(test_str).reshape(1,-1)))]
-    res_NB = classify_spam_ham(inp_features,parameters)
+        res_svm = ['ham','spam'][int(model_svm.predict(np.array(test_str).reshape(1,-1)))]
+        res_NB = classify_spam_ham(inp_features,parameters)
 
-    text = " Mail is ===>   \t {a} \t    <=== as per SVM Model  \n and \n Mail is ===>     \t {b} \t    <=== as per Naive Bayes Model".format(a=res_svm.upper(),b=res_NB.upper())
-    text = text.split('\n')
-    return render_template('home.html',prediction_text = text)
-   ## except:
-     #   return "Sorry for inconvenience. ReRun the model!!"
+        text = " Mail is ===>   \t {a} \t    <=== as per SVM Model  \n and \n Mail is ===>     \t {b} \t    <=== as per Naive Bayes Model".format(a=res_svm.upper(),b=res_NB.upper())
+        text = text.split('\n')
+        return render_template('home.html',prediction_text = text)
+    except:
+        return "Sorry for inconvenience. ReRun the model!!"
 
 
 if __name__ == "__main__":
