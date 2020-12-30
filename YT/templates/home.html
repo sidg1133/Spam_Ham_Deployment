@@ -1,0 +1,27 @@
+<html>
+    <body bgcolor=#d4a3ae>
+
+        <center>
+
+        <h1> SPAM HAM DETECTION </h1><br>
+            <img src='static\mail.jpg' alt="mail" width="50" height="50">
+            <br><br>
+        
+<form action="{{ url_for('home') }}" method="post">
+    <textarea ROWS="20" COLS="100" placeholder = "Enter MAIL to be Tested here !!!" name = "mail"></textarea><br><br>
+    <input type="submit" value="Predict!">
+
+</form>
+
+<br>
+
+            {% for para in prediction_text %}
+                <p>{{para}}</p>
+            {% endfor %}
+
+            <h4> Go For SVM Model in case of mismatch </h4><br>
+        
+    </center>
+
+    </body>
+</html>
