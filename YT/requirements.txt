@@ -3,5 +3,6 @@ Flask==1.1.1
 numpy==1.18.1
 scikit_learn==0.22.1
 gunicorn==20.0.4
+feather-format==0.4.1
 
 
